@@ -1,19 +1,18 @@
-const Book = require('../models/book');
+const Author = require('../models/author');
 
-exports.createBook = (req, res) => {
+exports.createAuthor = (req, res) => {
   if (Object.keys(req.body).length === 0) {
     res.status(400).send({ message: 'é obrigatorio body' });
     return;
   }
 
-  const book = new Book({
-    title: req.body.title,
-    authorId: req.body.authorId,
-    publisherId: req.body.publisherId,
-    price: req.body.price,
+  const author = new Author({
+    name: req.body.name,
+    country: req.body.country,
+    age: req.body.age,
   });
 
-  book
+  author
     .save()
     .then((data) => {
       res.status(200).send({ message: 'Salvei', data: data });
@@ -23,27 +22,27 @@ exports.createBook = (req, res) => {
     });
 };
 
-exports.findBooks = (req, res) => {
-  Book.find()
-    .then((books) => {
-      res.send(books);
+exports.findAuthors = (req, res) => {
+  Author.find()
+    .then((authors) => {
+      res.send(authors);
     })
     .catch((err) => {
       res
         .status(500)
-        .send({ message: err.message || 'Deu ruim so pegar os livros' });
+        .send({ message: err.message || 'Deu ruim so pegar as editoras' });
     });
 };
 
-exports.updateBook = (req, res) => {
+exports.updateAuthor = (req, res) => {
   if (Object.keys(req.body).length === 0) {
     res.status(400).send({ message: 'é obrigatorio body' });
     return;
   }
 
-  const bookId = req.body._id;
+  const authorId = req.body._id;
 
-  Book.findByIdAndUpdate(bookId, req.body)
+  Author.findByIdAndUpdate(authorId, req.body)
 
     .then((data) => {
       if (!data) {
@@ -57,17 +56,17 @@ exports.updateBook = (req, res) => {
     });
 };
 
-exports.deleteBook = (req, res) => {
+exports.deleteAuthor = (req, res) => {
   if (Object.keys(req.body).length === 0) {
     res.status(400).send({ message: 'é obrigatorio body' });
     return;
   }
 
-  const bookId = req.body._id;
+  const authorId = req.body._id;
 
-  console.log(bookId);
+  console.log(authorId);
 
-  Book.findByIdAndDelete(bookId)
+  Author.findByIdAndDelete(authorId)
 
     .then((data) => {
       if (!data) {
