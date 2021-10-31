@@ -7,10 +7,9 @@ exports.createBook = (req, res) => {
   }
 
   const book = new Book({
-    title: req.body.title,
-    authorId: req.body.authorId,
-    publisherId: req.body.publisherId,
-    price: req.body.price,
+    bookTitle: req.body.bookTitle,
+    authorsId: req.body.authorsId,
+    publishersId: req.body.publishersId,
   });
 
   book

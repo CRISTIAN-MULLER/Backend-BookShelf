@@ -7,9 +7,9 @@ exports.createPublisher = (req, res) => {
   }
 
   const publisher = new Publisher({
-    name: req.body.name,
+    publisherName: req.body.publisherName,
     country: req.body.country,
-    foundation: req.body.foundation,
+    foundationYear: req.body.foundationYear,
   });
 
   publisher

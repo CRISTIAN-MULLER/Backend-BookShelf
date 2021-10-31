@@ -1,4 +1,4 @@
-const Author = require('../models/author');
+const author = require('../models/Author');
 
 exports.createAuthor = (req, res) => {
   if (Object.keys(req.body).length === 0) {
@@ -6,14 +6,16 @@ exports.createAuthor = (req, res) => {
     return;
   }
 
-  const author = new Author({
-    name: req.body.name,
+  const Author = new author({
+    authorName: req.body.authorName,
+    alias: req.body.alias,
+    birthdDay: req.body.birthdDay,
+    birthState: req.body.birthState,
     country: req.body.country,
-    age: req.body.age,
+    nationalities: req.body.nationalities,
   });
 
-  author
-    .save()
+  Author.save()
     .then((data) => {
       res.status(200).send({ message: 'Salvei', data: data });
     })
@@ -23,7 +25,8 @@ exports.createAuthor = (req, res) => {
 };
 
 exports.findAuthors = (req, res) => {
-  Author.find()
+  author
+    .find()
     .then((authors) => {
       res.send(authors);
     })
@@ -42,7 +45,8 @@ exports.updateAuthor = (req, res) => {
 
   const authorId = req.body._id;
 
-  Author.findByIdAndUpdate(authorId, req.body)
+  author
+    .findByIdAndUpdate(authorId, req.body)
 
     .then((data) => {
       if (!data) {
@@ -66,7 +70,8 @@ exports.deleteAuthor = (req, res) => {
 
   console.log(authorId);
 
-  Author.findByIdAndDelete(authorId)
+  author
+    .findByIdAndDelete(authorId)
 
     .then((data) => {
       if (!data) {

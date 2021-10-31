@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 
-const authorSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  country: { type: String, required: true },
-  age: { type: Number, required: true },
+const AuthorSchema = new mongoose.Schema({
+  authorName: { type: String, required: true },
+  alias: { type: String, required: true },
+  birthdDay: { type: Date, required: true },
+  birthState: { type: String, required: true },
+  country: { type: String, default: 'Brasil' },
+  nationalities: { type: String, required: true },
 });
 
-const Author = mongoose.model('author', authorSchema);
+const Author = mongoose.model('Author', AuthorSchema);
 
 module.exports = Author;
